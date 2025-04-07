@@ -9,10 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.6.1",
+    "@tldraw/tldraw": "^3.11.1",
+    "axios": "^1.8.4",
+    "lucide-react": "^0.487.0",
     "motion": "^12.6.3",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
+    "react-redux": "^9.2.0",
+    "react-sketch-canvas": "^6.2.0",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

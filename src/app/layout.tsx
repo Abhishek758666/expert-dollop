@@ -16,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link href="https://fonts.cdnfonts.com/css/gaegu" rel="stylesheet" />
+        <link href="https://fonts.cdnfonts.com/css/solway" rel="stylesheet" />
       </head>
       <body className={`antialiased`}>
         <Provider>{children}</Provider>
