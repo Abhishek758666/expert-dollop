@@ -1,4 +1,4 @@
-import { doGet, doPatch, doPost } from "@/lib/axios";
+import { doDelete, doGet, doPatch, doPost } from "@/lib/axios";
 import { TNoteSchema } from "@/schemas/note.schema";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -44,16 +44,34 @@ export const addNotes = createAsyncThunk<AddNoteResponse, AddNoteArgs>(
 interface verifyNoteArgs {
   id: string;
   callback?: () => void;
+  onError?: () => void;
 }
+
 export const verifyNotes = createAsyncThunk<any, verifyNoteArgs>(
   "add notes",
-  async ({ id, callback }) => {
+  async ({ id, callback, onError }) => {
     try {
       const response = await doPatch(`/notes/${id}`);
 
       callback?.();
       return response;
     } catch (error) {
+      onError?.();
+      throw error;
+    }
+  }
+);
+
+export const deleteNotes = createAsyncThunk<any, verifyNoteArgs>(
+  "delete notes",
+  async ({ id, callback, onError }) => {
+    try {
+      const response = await doDelete(`/notes/${id}`);
+
+      callback?.();
+      return response;
+    } catch (error) {
+      onError?.();
       throw error;
     }
   }
