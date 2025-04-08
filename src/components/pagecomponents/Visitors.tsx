@@ -7,22 +7,38 @@ import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { getNotes } from "@/redux/thunks/note.thunk";
 import Canvas from "../uicomponents/Canvas";
-import { API_BASE_URL_IMAGE } from "@/lib/config";
 
 const RectangleBackground = () => (
   <div className="absolute inset-0 bg-[length:20px_20px] bg-[linear-gradient(to_right,rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.05)_1px,transparent_1px)]" />
 );
 
+const Transition = {
+  duration: 0.5,
+  type: "easeInOut",
+};
+
+export const noteCardVariants = {
+  initial: {
+    y: -100,
+    opacity: 0,
+  },
+  animate: (index: number) => ({
+    y: 0,
+    opacity: 1,
+    transition: { ...Transition, delay: index * 0.06 },
+  }),
+};
+
 const Visitors = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector((state) => state.notes?.loading);
   const notes = useAppSelector((state) => state.notes.data);
-
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     dispatch(getNotes());
   }, [dispatch]);
+
   return isLoading ? (
     "Loading..."
   ) : (
@@ -41,15 +57,23 @@ const Visitors = () => {
         </div>
         <div className="w-full h-[70vh] relative z-20 bg-transparent">
           <RectangleBackground />
-          {notes?.map((note, i) => (
-            <Card
-              key={i}
-              top={`${Math.floor(Math.random() * 80)}%`}
-              left={`${Math.floor(Math.random() * 80)}%`}
-              rotate={`${Math.floor(Math.random() * 20)}deg`}
-              data={note}
-            />
-          ))}
+          {notes?.map((note, i) => {
+            // Generate unique random positions for each card
+            const top = `${Math.floor(Math.random() * 70 + 5)}%`; // 5-75%
+            const left = `${Math.floor(Math.random() * 70 + 5)}%`; // 5-75%
+            const rotate = `${Math.floor(Math.random() * 40 - 20)}deg`; // -20 to 20 degrees
+
+            return (
+              <Card
+                index={i}
+                key={i}
+                top={top}
+                left={left}
+                rotate={rotate}
+                data={note}
+              />
+            );
+          })}
         </div>
       </div>
       {showModal && <Canvas handleClose={() => setShowModal(false)} />}
@@ -58,6 +82,7 @@ const Visitors = () => {
 };
 
 interface CardProps {
+  index: number;
   top: string;
   left: string;
   rotate: string;
@@ -68,7 +93,9 @@ interface CardProps {
   };
 }
 
-const Card = ({ top, left, rotate, data }: CardProps) => {
+const Card = ({ top, left, rotate, data, index }: CardProps) => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
   return (
     <motion.div
       style={{
@@ -76,27 +103,38 @@ const Card = ({ top, left, rotate, data }: CardProps) => {
         top,
         left,
         rotate,
+        x: position.x,
+        y: position.y,
       }}
+      variants={noteCardVariants}
+      initial="initial"
+      animate="animate"
+      custom={index}
       drag
       dragMomentum={false}
-      whileTap={{ zIndex: 99 }}
       dragElastic={0}
-      className="w-[140px] h-max cursor-grab active:cursor-grabbing"
+      onDragEnd={(event, info) => {
+        setPosition((prev) => ({
+          x: prev.x + info.offset.x,
+          y: prev.y + info.offset.y,
+        }));
+      }}
+      className="w-[140px] h-max cursor-grab active:cursor-grabbing relative"
     >
       <div className="relative w-full border bg-white rounded-md border-[#dadada]">
         <div className="flex flex-col gap-1 bg-secondary-foreground p-2">
           <Image
-            src={`${data?.image}`}
-            height={400}
-            width={400}
-            className="w-full rounded-md border h-[125px]"
+            src={data?.image || "/default-image.jpg"} // Add a fallback image
+            height={125}
+            width={140}
+            className="w-full rounded-md border h-[125px] object-cover"
             alt="visitor's image"
           />
           <p className="text-zinc-400 capitalize leading-none">{data?.name}</p>
           <p className="text-sm leading-none">{data?.message}</p>
         </div>
       </div>
-      <div className="absolute top-0 left-0 z-30 w-full h-full"></div>
+      <div className="absolute top-0 left-0 w-full h-full z-20"></div>
     </motion.div>
   );
 };

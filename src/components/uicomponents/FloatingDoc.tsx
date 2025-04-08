@@ -11,6 +11,7 @@ import {
   Pickaxe,
   User,
 } from "lucide-react";
+import { cardTiltVariants } from "../pagecomponents/Home";
 
 interface SocialLink {
   text: string;
@@ -45,11 +46,23 @@ const FloatingDoc = () => {
 
   return (
     <>
-      <div className="w-max max-w-[650px] h-[4rem] z-50 fixed bottom-5 border border-[#F5F6FF] rounded-2xl customShadow bg-white left-1/2 -translate-x-1/2 flex justify-between items-center px-5">
+      <motion.div
+        initial={{ opacity: 0, y: 70 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: "spring",
+            damping: 10,
+            stiffness: 200,
+          },
+        }}
+        className="w-max max-w-[650px] h-[4rem] z-50 fixed bottom-5 border border-[#F5F6FF] rounded-2xl customShadow bg-white left-1/2 -translate-x-1/2 flex justify-between items-center px-5"
+      >
         <ul className="flex gap-2 md:gap-6 text-md headingFont font-light capitalize">
-          {socialLinks.map(({ text, link, icon }) => {
+          {socialLinks.map(({ text, link, icon }, i) => {
             return (
-              <li
+              <motion.li
                 key={text}
                 className="relative"
                 onMouseEnter={() => setIsHovered(text)}
@@ -88,7 +101,7 @@ const FloatingDoc = () => {
                     <span className="sr-only">{text}</span>
                   </motion.div>
                 </Link>
-              </li>
+              </motion.li>
             );
           })}
         </ul>
@@ -105,7 +118,7 @@ const FloatingDoc = () => {
             <span className="sr-only">Chat</span>
           </motion.div>
         </Link>
-      </div>
+      </motion.div>
     </>
   );
 };

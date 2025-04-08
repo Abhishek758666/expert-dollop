@@ -17,16 +17,29 @@ interface StickyNoteProps {
   isEven: boolean;
 }
 
+const cardTiltVariants = {
+  inital: {
+    y: 50,
+  },
+  animate: {
+    rotate: [50, 0],
+    y: 0,
+    transition: {
+      duration: 10,
+      type: "spring",
+      damping: 8,
+      stiffness: 150,
+    },
+  },
+};
+
 const StickyNote: React.FC<StickyNoteProps> = ({ child, bg, isEven }) => {
   return (
     <motion.div
       drag
+      dragMomentum={false}
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      style={{
-        backgroundColor: colorOptions[bg],
-        marginTop: isEven ? "2rem" : "0",
-      }}
-      className="h-[130px] w-[140px] flex justify-center items-center cursor-grab shadow-lg  p-4"
+      className="h-max w-max flex justify-center items-center cursor-grab"
       whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
       whileTap={{
         rotate: "10deg",
@@ -38,9 +51,21 @@ const StickyNote: React.FC<StickyNoteProps> = ({ child, bg, isEven }) => {
         },
       }}
     >
-      <span className="text-xl font-bold text-center leading-none">
-        {child}
-      </span>
+      <motion.div
+        style={{
+          transformOrigin: "top left",
+          backgroundColor: colorOptions[bg],
+          marginTop: isEven ? "2rem" : "0",
+        }}
+        variants={cardTiltVariants}
+        initial="inital"
+        animate="animate"
+        className="h-[130px] w-[140px] flex justify-center items-center shadow-lg p-4"
+      >
+        <span className="text-xl font-bold text-center leading-none">
+          {child}
+        </span>
+      </motion.div>
     </motion.div>
   );
 };
