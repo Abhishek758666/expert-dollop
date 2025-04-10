@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   Binoculars,
+  Ellipsis,
   House,
   Mail,
   MessageCircleMore,
   Pickaxe,
   User,
 } from "lucide-react";
-import { cardTiltVariants } from "../pagecomponents/Home";
+import Chatbot from "../Chatbot";
 
 interface SocialLink {
   text: string;
@@ -23,8 +24,7 @@ const socialLinks: SocialLink[] = [
   { text: "Home", link: "/", icon: <House /> },
   { text: "Visitors", link: "/visitors", icon: <Binoculars /> },
   { text: "Projects", link: "/projects", icon: <Pickaxe /> },
-  { text: "About", link: "/about", icon: <User /> },
-  { text: "Contact", link: "/contact", icon: <Mail /> },
+  { text: "Contact", link: "mailto:abhishekkhati39@gmail.com", icon: <Mail /> },
 ];
 
 const hoverMotion = {
@@ -108,16 +108,45 @@ const FloatingDoc = () => {
 
         <div className="h-[50%] w-[2px] bg-[#B8BBD2] rounded-xl mx-4" />
 
-        <Link href={"#"} target="_blank">
-          <motion.div
-            {...hoverMotion}
-            className="flex items-center gap-2 font-bold border-[#F5F6FF] text-[#B8BBD2] p-2 rounded-2xl border-2 text-sm customShadow"
-            aria-label="Chat"
-          >
-            <MessageCircleMore />
-            <span className="sr-only">Chat</span>
-          </motion.div>
-        </Link>
+        <motion.li
+          className="relative"
+          onMouseEnter={() => setIsHovered("Chat Bot")}
+          onMouseLeave={() => setIsHovered(null)}
+        >
+          {isHovered === "Chat Bot" && (
+            <motion.span
+              className="customShadow font-sans absolute -top-15 left-1/2 -translate-x-1/2 border border-[#F5F6FF] rounded-2xl bg-white px-2 font-medium text-[#474747]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  duration: 0.2,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 10,
+                },
+              }}
+              exit={{ opacity: 0, y: 20 }}
+            >
+              Chat Bot
+            </motion.span>
+          )}
+          <Link href={"/chatbot"}>
+            <motion.div
+              {...hoverMotion}
+              className={`${
+                pathName === "chatbot"
+                  ? "border-[#474747] !text-[#474747]"
+                  : "border-[#F5F6FF] text-[#B8BBD2]"
+              } flex items-center gap-2 font-bold p-2 rounded-2xl border-2 text-sm customShadow`}
+              aria-label="Chat Bot"
+            >
+              <Ellipsis className="animate-bounce" color="#000" />
+              <span className="sr-only">"Chat Bot</span>
+            </motion.div>
+          </Link>
+        </motion.li>
       </motion.div>
     </>
   );

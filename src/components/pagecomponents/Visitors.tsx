@@ -42,7 +42,7 @@ const Visitors = () => {
   return isLoading ? (
     "Loading..."
   ) : (
-    <div className="w-full h-full py-20 px-5">
+    <div className="w-full h-screen py-10 px-5">
       <div className="max-w-[550px] h-full mx-auto relative border rounded-xl border-[#dadada] bg-white overflow-hidden">
         <div className="navbar relative w-full bg-white p-4 z-30 h-max border-b border-[#dadada] flex justify-between">
           <p>{notes?.length ?? 0} Notes</p>

@@ -103,7 +103,7 @@ const ResumeDownload = () => {
       aria-label="Download resume"
     >
       <motion.div
-        className="flex items-center gap-2 font-bold text-2xl relative mb-14"
+        className="flex items-center gap-2 font-bold text-2xl relative"
         variants={cardTiltVariants}
         initial="initial"
         whileInView="animate"
@@ -112,7 +112,19 @@ const ResumeDownload = () => {
         <div className="absolute -top-7 right-44 rotate-90">
           <ThreeLines />
         </div>
-        <Download /> Download Resume
+        <motion.div
+          animate={{
+            y: [-10, 0, 0 - 10],
+            transition: {
+              repeat: Infinity,
+              duration: 1,
+              type: "linear",
+            },
+          }}
+        >
+          <Download />
+        </motion.div>
+        Download Resume
       </motion.div>
     </Link>
   );
@@ -166,6 +178,8 @@ const HomeContent = () => {
   return (
     <section className="w-full h-full">
       <div className="flex flex-col gap-10">
+        <ResumeDownload />
+
         <SocialLinks links={SOCIAL_LINKS} />
         <Skills skills={SKILLS} />
 
@@ -182,8 +196,6 @@ const HomeContent = () => {
             <ExperienceItem key={`exp-${index}`} {...exp} />
           ))}
         </div>
-
-        <ResumeDownload />
       </div>
     </section>
   );

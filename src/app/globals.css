@@ -36,3 +36,27 @@ body {
     rgba(114, 98, 218, 0.094) 0px 5.10612px 11.2335px -2.8125px,
     rgba(114, 98, 218, 0.04) 0px 16px 35.2px -3.75px;
 }
+
+/*  */
+@keyframes rainbow-shadow {
+  0% {
+    box-shadow: 0 0 20px 0px #ff0000, 0 0 30px 10px #ff7f00,
+      0 0 40px 20px #ffff00;
+  }
+  33% {
+    box-shadow: 0 0 20px 0px #00ff00, 0 0 30px 10px #0000ff,
+      0 0 40px 20px #4b0082;
+  }
+  66% {
+    box-shadow: 0 0 20px 0px #8f00ff, 0 0 30px 10px #ff0000,
+      0 0 40px 20px #ff7f00;
+  }
+  100% {
+    box-shadow: 0 0 20px 0px #ff0000, 0 0 30px 10px #ff7f00,
+      0 0 40px 20px #ffff00;
+  }
+}
+
+.animated-rainbow-shadow {
+  animation: rainbow-shadow 3s linear infinite;
+}

@@ -19,14 +19,14 @@ export const EXPERIENCE: ExperienceType[] = [
     company: "Reflex It Solution",
     period: "July 2024 - current",
     description:
-      "Built a web app and implemented API for 3+ projects. Also refactored UI and codebase of existing projects.",
+      "completed 3+ projects. Made reusable components and maintained codebase of existing ecommerce project",
   },
   {
     jobTitle: "Frontend Intern",
     company: "Reflex It Solution",
     period: "March - July 2024",
     description:
-      "Built a Dashboard and web app UI for a client using Next.js, TypeScript, SCSS, and Redux.",
+      "Built a Dashboard and web app of Bishraam using Next.js, TypeScript, SCSS, and integrated api using Redux and axios",
   },
 ];
 
