@@ -33,7 +33,7 @@ const hoverMotion = {
 
 const Tooltip = ({ text }: { text: string }) => (
   <motion.span
-    className="customShadow font-sans absolute -top-15 left-1/2 -translate-x-1/2 border border-[#F5F6FF] rounded-2xl bg-white px-2 font-medium text-[#474747] max-w-[900px] w-full"
+    className="customShadow font-sans absolute -top-15 left-1/2 -translate-x-1/2 border border-[#F5F6FF] rounded-2xl bg-white px-2 font-medium text-[#474747] max-w-[900px] w-max"
     initial={{ opacity: 0, y: 20 }}
     animate={{
       opacity: 1,
