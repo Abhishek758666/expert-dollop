@@ -22,11 +22,11 @@
 body {
   background: #ffffff;
   color: #474747;
-  font-family: "Gaegu", sans-serif;
+  font-family: var(--font-gaegu), sans-serif;
 }
 
 .headingFont {
-  font-family: "Solway", sans-serif !important;
+  font-family: var(--font-solway), sans-serif !important;
   font-weight: 800;
 }
 
