@@ -3,13 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import {
-  Binoculars,
-  BotMessageSquare,
-  House,
-  Mail,
-  Pickaxe,
-} from "lucide-react";
+import { Binoculars, Bot, House, Mail, Pickaxe } from "lucide-react";
 
 const socialLinks = [
   { text: "Home", link: "/", icon: <House /> },
@@ -113,8 +107,11 @@ const ChatBotLink = ({
             : "border-[#F5F6FF] text-[#B8BBD2]"
         } flex items-center gap-2 font-bold p-2 rounded-2xl border-2 text-sm customShadow`}
         aria-label="Chat Bot"
+        style={{
+          backgroundImage: "url(/robo.gif)",
+        }}
       >
-        <BotMessageSquare className="animate-bounce" />
+        <Bot className="animate-bounce" />
       </motion.div>
     </Link>
   </motion.div>

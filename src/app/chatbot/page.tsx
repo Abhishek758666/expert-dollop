@@ -1,7 +1,12 @@
-import React from "react";
+"use client";
+import ChatBot from "@/components/pagecomponents/Chatbot";
 
 const page = () => {
-  return <div>this is chat bot</div>;
+  return (
+    <div>
+      <ChatBot />
+    </div>
+  );
 };
 
 export default page;

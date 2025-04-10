@@ -39,11 +39,9 @@ const Visitors = () => {
     dispatch(getNotes());
   }, [dispatch]);
 
-  return isLoading ? (
-    "Loading..."
-  ) : (
-    <div className="w-full h-screen py-10 px-5">
-      <div className="max-w-[550px] h-full mx-auto relative border rounded-xl border-[#dadada] bg-white overflow-hidden">
+  return (
+    <div className="w-full h-[99.8vh] py-10 px-5">
+      <div className="max-w-[550px] h-max mx-auto relative border rounded-xl border-[#dadada] bg-white overflow-hidden">
         <div className="navbar relative w-full bg-white p-4 z-30 h-max border-b border-[#dadada] flex justify-between">
           <p>{notes?.length ?? 0} Notes</p>
           <Button
@@ -55,25 +53,30 @@ const Visitors = () => {
             <span className="text-white ml-3 text-lg">Leave a note</span>
           </Button>
         </div>
-        <div className="w-full h-[70vh] relative z-20 bg-transparent">
+        <div className="w-full h-[80vh] relative z-20 bg-transparent">
           <RectangleBackground />
-          {notes?.map((note, i) => {
-            // Generate unique random positions for each card
-            const top = `${Math.floor(Math.random() * 70 + 5)}%`; // 5-75%
-            const left = `${Math.floor(Math.random() * 70 + 5)}%`; // 5-75%
-            const rotate = `${Math.floor(Math.random() * 40 - 20)}deg`; // -20 to 20 degrees
+          {!isLoading ? (
+            notes?.map((note, i) => {
+              const top = `${Math.floor(Math.random() * 70 + 5)}%`;
+              const left = `${Math.floor(Math.random() * 70 + 5)}%`;
+              const rotate = `${Math.floor(Math.random() * 40 - 20)}deg`;
 
-            return (
-              <Card
-                index={i}
-                key={i}
-                top={top}
-                left={left}
-                rotate={rotate}
-                data={note}
-              />
-            );
-          })}
+              return (
+                <Card
+                  index={i}
+                  key={i}
+                  top={top}
+                  left={left}
+                  rotate={rotate}
+                  data={note}
+                />
+              );
+            })
+          ) : (
+            <div className="h-full w-full flex text-xl justify-center items-center">
+              <span className="animate-bounce">Loading...</span>
+            </div>
+          )}
         </div>
       </div>
       {showModal && <Canvas handleClose={() => setShowModal(false)} />}
@@ -86,7 +89,7 @@ interface CardProps {
   top: string;
   left: string;
   rotate: string;
-  data?: {
+  data: {
     image: string;
     name: string;
     message: string;
@@ -124,7 +127,7 @@ const Card = ({ top, left, rotate, data, index }: CardProps) => {
       <div className="relative w-full border bg-white rounded-md border-[#dadada]">
         <div className="flex flex-col gap-1 bg-secondary-foreground p-2">
           <Image
-            src={data?.image || "/default-image.jpg"} // Add a fallback image
+            src={data?.image}
             height={125}
             width={140}
             className="w-full rounded-md border h-[125px] object-cover"

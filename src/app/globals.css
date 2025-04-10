@@ -60,3 +60,17 @@ body {
 .animated-rainbow-shadow {
   animation: rainbow-shadow 3s linear infinite;
 }
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.8rem !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-bottom-right-radius: 0.35rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #dadada;
+}
