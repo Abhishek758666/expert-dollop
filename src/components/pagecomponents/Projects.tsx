@@ -3,36 +3,33 @@ import Image from "next/image";
 import React from "react";
 import AnimatedRect from "../svgcomponents/AnimatedRect";
 import { motion } from "motion/react";
+import Link from "next/link";
 const projectsData = [
   {
-    image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
-    title: "Mountain Escape",
+    link: "https://bishraam.com/",
+    image: "/bishraam.png",
+    title: "Bishraam",
     description:
-      "A peaceful retreat into the mountains with misty peaks and serene landscapes.",
+      "Hotel and trekking booking site with 300+ registered hotels in the country.",
   },
   {
-    image: "https://images.unsplash.com/photo-1493244040629-496f6d136cc3",
-    title: "Ocean View",
-    description:
-      "Crystal clear waters with gentle waves crashing on the shore at sunset.",
+    link: "https://yamburi.com/",
+    image: "/yam.png",
+    title: "Yamburi",
+    description: "Ecommerce based on South Africa.",
   },
   {
-    image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308",
-    title: "City Lights",
-    description:
-      "A bustling cityscape illuminated with colorful lights during the night.",
+    link: "https://www.esquire.co.za/",
+    image: "/esquire.png",
+    title: "Esquire",
+    description: "Ecommerce based on South Africa.",
   },
   {
-    image: "https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6",
-    title: "Forest Trail",
+    link: "#",
+    image: "/3hc.png",
+    title: "3HC",
     description:
-      "A winding path through a dense forest filled with vibrant green trees.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde",
-    title: "Desert Dunes",
-    description:
-      "Rolling sand dunes under the blazing sun, creating a mesmerizing pattern.",
+      "High Himalayan Hydro Construction - private construction company mostly focused on hydro power.",
   },
 ];
 
@@ -71,6 +68,7 @@ interface ProjectCardProps {
   index: number;
   title: string;
   image: string;
+  link: string;
   description: string;
 }
 
@@ -91,7 +89,7 @@ const ProjectCard = (props: ProjectCardProps) => {
             height={1000}
             width={1000}
             alt="project image"
-            className="h-full w-auto object-cover object-center rounded-xl"
+            className="h-full w-auto object-cover object-left rounded-xl"
           />
         </div>
         <div className="right flex flex-col justify-center items-start gap-5 h-full w-full">
@@ -101,9 +99,9 @@ const ProjectCard = (props: ProjectCardProps) => {
           <p className="text-lg leading-none">{props.description}</p>
         </div>
       </div>
-      <div className="overlay w-full h-full">
+      <Link target="_blank" href={props.link} className="overlay w-full h-full">
         <AnimatedRect />
-      </div>
+      </Link>
     </motion.div>
   );
 };

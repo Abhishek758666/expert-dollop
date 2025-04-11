@@ -19,7 +19,7 @@ export const EXPERIENCE: ExperienceType[] = [
     company: "Reflex It Solution",
     period: "July 2024 - current",
     description:
-      "completed 3+ projects. Made reusable components and maintained codebase of existing ecommerce project",
+      "worked in 4+ projects. Made reusable components and maintained codebase of existing ecommerce project",
   },
   {
     jobTitle: "Frontend Intern",

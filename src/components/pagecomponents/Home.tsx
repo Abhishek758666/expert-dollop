@@ -232,7 +232,7 @@ const LayoutAside = () => {
           isEven={false}
           bg={2}
         />
-        <StickyNote child="completed 5+ client projects" bg={3} isEven />
+        <StickyNote child="worked in 5+ client projects" bg={3} isEven />
         <StickyNote
           child={
             <div className="flex flex-col items-center gap-2">
@@ -242,7 +242,7 @@ const LayoutAside = () => {
                 width={50}
                 height={50}
               />
-              <span>Kathmandu, Nepal</span>
+              <span>Lalitpur, Nepal</span>
             </div>
           }
           bg={5}
